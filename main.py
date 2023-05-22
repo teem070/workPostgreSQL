@@ -1,30 +1,35 @@
-import psycopg2
+from flask import Flask, jsonify, request
 
-conn = psycopg2.connect(dbname="raspisanie", user="postgres", password="12qw34er", host="127.0.0.1")
-cursor = conn.cursor()
+app = Flask(__name__)
 
-# conn.autocommit = True
+@app.route('/prepods', methods=['GET'])
+def get_prepods():
+    # Список всех преподавателей, проводящих занятия в семестре
+    return 0
 
-# # команда для создания базы данных metanit
-# sql = "CREATE DATABASE raspisanie"
-#
-# # выполняем код sql
-# cursor.execute(sql)
-# print("База данных успешно создана")
+@app.route('/groups', methods=['GET'])
+def get_groups():
+    # Список всех групп, проводящих занятия в семестре
+    return 0
 
-# # создаем таблицу аудиторий
-# cursor.execute("CREATE TABLE classroom (id SERIAL PRIMARY KEY, nomer INTEGER,  korpus INTEGER)")
-# # поддверждаем транзакцию
-# conn.commit()
-# print("Таблица classroom успешно создана")
+@app.route('/predmets', methods=['GET'])
+def get_predmets():
+    # Список всех дисциплин, запланированных в аудитории lab
 
-# добавляем строку в таблицу people
-cursor.execute("INSERT INTO classroom (nomer, korpus) VALUES (430, 1)")
-cursor.execute("INSERT INTO classroom (nomer, korpus) VALUES (450, 1)")
-cursor.execute("INSERT INTO classroom (nomer, korpus) VALUES (454, 1)")
-# выполняем транзакцию
-conn.commit()
-print("Данные добавлены")
+    # Получаем параметр 'lab' из запроса
+    lab = request.args.get('lab')
 
-cursor.close()
-conn.close()
+    return 0
+
+@app.route('/pair', methods=['GET'])
+def get_pair():
+    # Список всех пар, запланированных в аудитории lab на дату date
+
+    # Получаем параметры "date" и 'lab' из запроса
+    date = request.args.get('date', default='2023-05-22')
+    lab = request.args.get('lab')
+
+    return 0
+
+if __name__ == '__main__':
+    app.run()
