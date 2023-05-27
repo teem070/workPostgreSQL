@@ -29,9 +29,6 @@ for temp_column in range(1, max_column+1):
         temp_value = sheet.cell(row=temp_row, column=temp_column).value
         if temp_value == None:
             continue
-        # if temp_value in day_week:
-        #     print("ok")
-        #print(temp_value)
 
         if re.fullmatch(r'...\d{2}.\d{2}.\d{2}', temp_value):
             # print(temp_value)
@@ -41,10 +38,6 @@ for temp_column in range(1, max_column+1):
             continue
 
         if re.search(r'Группа', temp_value):
-            # temp_value = sheet.cell(row=temp_row+1, column=temp_column).value
-            # if temp_value == None:
-            #     continue
-            # temp_row += 3
             match_end = re.search('Дисциплина:', temp_value)
             match_start = re.search('Занятие:', temp_value)
             predmet = temp_value[match_end.end()+1:match_start.start()-1]
@@ -52,6 +45,3 @@ for temp_column in range(1, max_column+1):
             teacher = temp_value[match_end.end() + 1:]
 
             print('430', date, temp_row-num_pair, predmet, teacher)
-
-        # else:
-        #     print("next")
